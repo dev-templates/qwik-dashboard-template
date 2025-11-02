@@ -36,7 +36,7 @@
     "@tailwindcss/vite": "^4.1.16",
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "20.14.11",
+    "@types/node": "24.9.2",
     "@types/qrcode": "^1.5.6",
     "@types/speakeasy": "^2.0.10",
     "globals": "16.0.0",
