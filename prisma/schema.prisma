@@ -1,0 +1,182 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User model with authentication fields
+model User {
+  id                 Int               @id @default(autoincrement())
+  email              String            @unique
+  username           String            @unique
+  password_hash      String
+  name               String?
+  avatar_url         String?           @map("avatar_url")
+  is_active          Boolean           @default(true) @map("is_active")
+  is_verified        Boolean           @default(false) @map("is_verified")
+  verification_token String?           @map("verification_token")
+  
+  // 2FA fields
+  two_factor_enabled Boolean           @default(false) @map("two_factor_enabled")
+  two_factor_secret  String?           @map("two_factor_secret")
+  recovery_codes     String?           @map("recovery_codes") // JSON stringified array
+  
+  // Timestamps
+  created_at         DateTime          @default(now()) @map("created_at")
+  updated_at         DateTime          @updatedAt @map("updated_at")
+  last_login_at      DateTime?         @map("last_login_at")
+  
+  // Relations
+  user_roles         UserRole[]        @relation("UserRoles")
+  sessions           Session[]         @relation("UserSessions")
+  login_attempts     LoginAttempt[]    @relation("UserLoginAttempts")
+  pending_auths      PendingAuth[]     @relation("UserPendingAuths")
+  
+  @@map("users")
+}
+
+// Role model for RBAC
+model Role {
+  id                 Int               @id @default(autoincrement())
+  name               String            @unique
+  display_name       String            @map("display_name")
+  description        String?
+  is_system          Boolean           @default(false) @map("is_system") // System roles cannot be deleted
+  
+  // Timestamps
+  created_at         DateTime          @default(now()) @map("created_at")
+  updated_at         DateTime          @updatedAt @map("updated_at")
+  
+  // Relations
+  user_roles         UserRole[]        @relation("RoleUsers")
+  role_permissions   RolePermission[]  @relation("RolePermissions")
+  
+  @@map("roles")
+}
+
+// Permission model
+model Permission {
+  id                 Int               @id @default(autoincrement())
+  name               String            @unique
+  display_name       String            @map("display_name")
+  description        String?
+  resource           String            // e.g., "users", "posts", "settings"
+  action             String            // e.g., "create", "read", "update", "delete"
+  
+  // Timestamps
+  created_at         DateTime          @default(now()) @map("created_at")
+  updated_at         DateTime          @updatedAt @map("updated_at")
+  
+  // Relations
+  role_permissions   RolePermission[]  @relation("PermissionRoles")
+  
+  @@unique([resource, action])
+  @@map("permissions")
+}
+
+// Junction table for User-Role many-to-many relationship
+model UserRole {
+  id                 Int               @id @default(autoincrement())
+  user_id            Int               @map("user_id")
+  role_id            Int               @map("role_id")
+  assigned_at        DateTime          @default(now()) @map("assigned_at")
+  assigned_by        Int?              @map("assigned_by") // User who assigned this role
+  
+  // Relations
+  user               User              @relation("UserRoles", fields: [user_id], references: [id], onDelete: Cascade)
+  role               Role              @relation("RoleUsers", fields: [role_id], references: [id], onDelete: Cascade)
+  
+  @@unique([user_id, role_id])
+  @@map("user_roles")
+}
+
+// Junction table for Role-Permission many-to-many relationship
+model RolePermission {
+  id                 Int               @id @default(autoincrement())
+  role_id            Int               @map("role_id")
+  permission_id      Int               @map("permission_id")
+  granted_at         DateTime          @default(now()) @map("granted_at")
+  
+  // Relations
+  role               Role              @relation("RolePermissions", fields: [role_id], references: [id], onDelete: Cascade)
+  permission         Permission        @relation("PermissionRoles", fields: [permission_id], references: [id], onDelete: Cascade)
+  
+  @@unique([role_id, permission_id])
+  @@map("role_permissions")
+}
+
+// Session management
+model Session {
+  id                 String            @id @default(uuid())
+  user_id            Int               @map("user_id")
+  token              String            @unique
+  ip_address         String?           @map("ip_address")
+  user_agent         String?           @map("user_agent")
+  expires_at         DateTime          @map("expires_at")
+  created_at         DateTime          @default(now()) @map("created_at")
+  
+  // Relations
+  user               User              @relation("UserSessions", fields: [user_id], references: [id], onDelete: Cascade)
+  
+  @@map("sessions")
+}
+
+// Login attempt tracking for security
+model LoginAttempt {
+  id                 Int               @id @default(autoincrement())
+  user_id            Int?              @map("user_id")
+  email              String
+  ip_address         String            @map("ip_address")
+  user_agent         String?           @map("user_agent")
+  success            Boolean
+  failure_reason     String?           @map("failure_reason")
+  attempted_at       DateTime          @default(now()) @map("attempted_at")
+  
+  // Relations
+  user               User?             @relation("UserLoginAttempts", fields: [user_id], references: [id], onDelete: SetNull)
+  
+  @@index([email])
+  @@index([ip_address])
+  @@map("login_attempts")
+}
+
+// Pending authentication for 2FA
+model PendingAuth {
+  id                 Int               @id @default(autoincrement())
+  token              String            @unique
+  user_id            Int               @map("user_id")
+  ip_address         String            @map("ip_address")
+  user_agent         String?           @map("user_agent")
+  expires_at         DateTime          @map("expires_at")
+  created_at         DateTime          @default(now()) @map("created_at")
+  
+  // Relations
+  user               User              @relation("UserPendingAuths", fields: [user_id], references: [id], onDelete: Cascade)
+  
+  @@index([token])
+  @@index([expires_at])
+  @@map("pending_auths")
+}
+
+// System settings
+model Setting {
+  id                 Int               @id @default(autoincrement())
+  key                String            @unique
+  value              String
+  type               String            // "string", "number", "boolean", "json"
+  description        String?
+  is_public          Boolean           @default(false) @map("is_public")
+  created_at         DateTime          @default(now()) @map("created_at")
+  updated_at         DateTime          @updatedAt @map("updated_at")
+  
+  @@map("settings")
+}

@@ -1,0 +1,231 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-scheme: light;
+
+  /* Scrollbar colors */
+  --scrollbar-thumb: rgba(156, 163, 175, 0.5);
+  --scrollbar-thumb-hover: rgba(156, 163, 175, 0.8);
+}
+
+.dark {
+  --color-scheme: dark;
+  color-scheme: dark;
+
+  /* Dark mode scrollbar colors */
+  --scrollbar-thumb: rgba(156, 163, 175, 0.5);
+  --scrollbar-thumb-hover: rgba(156, 163, 175, 0.8);
+}
+
+/* Base height settings */
+html,
+body {
+  @apply h-full m-0;
+}
+
+/* Qwik root element height */
+body > div[data-qwik-city] {
+  @apply h-full;
+}
+
+body {
+  font-family: var(--font-sans);
+  @apply bg-white dark:bg-gray-900;
+}
+
+/* Global scrollbar styles - applies to all scrollable elements */
+* {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+/* Webkit (Chrome, Safari, Edge) */
+*::-webkit-scrollbar {
+  @apply w-3 h-3;
+}
+
+*::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply rounded-md border-2 border-transparent bg-clip-padding bg-[var(--scrollbar-thumb)];
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  @apply bg-[var(--scrollbar-thumb-hover)];
+}
+
+/* Horizontal scrollbars should be thinner */
+*::-webkit-scrollbar:horizontal {
+  @apply h-2;
+}
+
+/* Table base styles */
+table {
+  @apply w-full table-auto;
+}
+
+/* Auto-fill height table container */
+.fill-height-table-container {
+  @apply overflow-auto;
+}
+
+/* Auto-fill height table */
+.fill-height-table {
+  @apply w-full min-w-max;
+}
+
+/* Fixed header */
+.fill-height-table thead {
+  @apply sticky top-0 z-20;
+}
+
+/* TableFoot is now outside table, no sticky positioning needed */
+
+/* tfoot content uses flexbox layout */
+.tfoot-content {
+  @apply flex items-center justify-between w-full;
+}
+
+.tfoot-left {
+  @apply flex-shrink-0;
+}
+
+.tfoot-center {
+  @apply flex-1 flex justify-center;
+}
+
+.tfoot-right {
+  @apply flex-shrink-0;
+}
+
+/* Scroll container styles */
+.fill-height-table-container {
+  /* Safari fallback */
+  @apply pr-0;
+
+  /* Progressive enhancement: reserve space for scrollbar in supported browsers */
+  scrollbar-gutter: auto;
+}
+
+/* For browsers that support scrollbar-gutter */
+@supports (scrollbar-gutter: auto) {
+  .fill-height-table-container {
+    @apply pr-0;
+  }
+}
+
+/* Table header styles */
+.fill-height-table thead {
+  @apply bg-gray-50 dark:bg-gray-700;
+}
+
+.fill-height-table thead tr {
+  @apply bg-gray-50 dark:bg-gray-700;
+}
+
+.fill-height-table thead th {
+  @apply px-6 py-3 text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider bg-gray-50 dark:bg-gray-700;
+}
+
+/* Remove forced text alignment, let component's align property take effect */
+.fill-height-table thead th.text-center {
+  @apply text-center;
+}
+
+.fill-height-table thead th.text-right {
+  @apply text-right;
+}
+
+.fill-height-table thead th.text-left {
+  @apply text-left;
+}
+
+/* Table column divider styles */
+.show-column-dividers th:not(:last-child),
+.show-column-dividers td:not(:last-child) {
+  @apply border-r border-gray-200 dark:border-gray-700;
+}
+
+/* For fill-height-table, column dividers need special handling */
+.fill-height-table.show-column-dividers th:not(:last-child),
+.fill-height-table.show-column-dividers td:not(:last-child) {
+  @apply border-r border-gray-200 dark:border-gray-700;
+}
+
+/* Table row styles */
+.fill-height-table tbody td {
+  @apply px-6 py-4;
+}
+
+/* Ensure cell alignment in tbody works correctly */
+.fill-height-table tbody td.text-center {
+  @apply text-center;
+}
+
+.fill-height-table tbody td.text-right {
+  @apply text-right;
+}
+
+.fill-height-table tbody td.text-left {
+  @apply text-left;
+}
+
+/* Table styles with tbody-only horizontal scroll - using double table approach */
+.scrollable-body-table-container {
+  @apply relative;
+}
+
+/* Header wrapper */
+.scrollable-body-table-header-wrapper {
+  @apply overflow-hidden bg-gray-50 dark:bg-gray-700;
+}
+
+/* Content wrapper */
+.scrollable-body-table-content-wrapper {
+  @apply overflow-x-auto;
+  max-height: calc(100vh - 400px); /* Adjust as needed */
+}
+
+/* Table itself */
+.scrollable-body-table {
+  /* Maintain original table layout */
+  @apply min-w-max;
+}
+
+/* Ensure table has minimum width to trigger scrolling */
+.scrollable-body-table th,
+.scrollable-body-table td {
+  @apply whitespace-nowrap;
+}
+
+/* Sticky header support for normal tables */
+div.overflow-auto table thead {
+  @apply sticky top-0 z-10;
+}
+
+/* Set scrollbar spacing */
+.overflow-auto {
+  /* Safari fallback */
+  @apply pr-0;
+
+  /* Standard property */
+  scrollbar-gutter: auto;
+}
+
+/* For browsers that support scrollbar-gutter */
+@supports (scrollbar-gutter: auto) {
+  .overflow-auto {
+    @apply pr-0;
+  }
+}

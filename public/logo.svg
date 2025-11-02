@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 50" fill="none">
+  <rect x="10" y="10" width="30" height="30" rx="6" fill="#6366f1"/>
+  <rect x="15" y="15" width="20" height="20" rx="4" fill="#818cf8"/>
+  <text x="50" y="36" font-family="var(--font-mono)" font-size="32" font-weight="bold" fill="#6b7280">DASHBOARD</text>
+</svg>
