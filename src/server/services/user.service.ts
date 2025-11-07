@@ -92,7 +92,7 @@ export async function getUsers(filters: UserFilters = {}): Promise<UsersResponse
 // Get user by ID
 export async function getUserById(id: string): Promise<User | null> {
   const dbUser = await prisma.user.findUnique({
-    where: { id: parseInt(id) },
+    where: { id: parseInt(id, 10) },
     include: {
       user_roles: {
         include: {
@@ -159,7 +159,7 @@ export async function createUser(input: CreateUserInput): Promise<User> {
 
 // Update user
 export async function updateUser(id: string, input: UpdateUserInput): Promise<User | null> {
-  const userId = parseInt(id);
+  const userId = parseInt(id, 10);
   const dbUser = await prisma.user.findUnique({
     where: { id: userId },
     include: {
@@ -254,7 +254,7 @@ export async function updateUser(id: string, input: UpdateUserInput): Promise<Us
 // Delete user
 export async function deleteUser(id: string): Promise<boolean> {
   try {
-    const userId = parseInt(id);
+    const userId = parseInt(id, 10);
 
     // Check if user exists
     const user = await prisma.user.findUnique({
@@ -279,7 +279,7 @@ export async function deleteUser(id: string): Promise<boolean> {
 
 // Toggle user status
 export async function toggleUserStatus(id: string): Promise<User | null> {
-  const userId = parseInt(id);
+  const userId = parseInt(id, 10);
   const user = await prisma.user.findUnique({
     where: { id: userId },
     include: {
@@ -314,7 +314,7 @@ export async function toggleUserStatus(id: string): Promise<User | null> {
 
 // Get user as AuthUser (with full permission structure)
 export async function getUserAsAuthUser(id: string): Promise<AuthUser | null> {
-  const userId = parseInt(id);
+  const userId = parseInt(id, 10);
   const user = await prisma.user.findUnique({
     where: { id: userId },
     include: {

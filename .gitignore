@@ -45,11 +45,6 @@ lerna-debug.log*
 
 /src/generated/prisma
 
-# Playwright
-test-results/
-playwright-report/
-playwright/.cache/
-
 # Database
 *.db
 *.db-journal
@@ -57,8 +52,3 @@ prisma/migrations/
 
 # tmp
 tmp/
-
-# Playwright
-/playwright-report/
-/blob-report/
-/playwright/.cache/

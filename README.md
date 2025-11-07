@@ -40,7 +40,6 @@ A production-ready dashboard template built with Qwik and Tailwind CSS, designed
 - **Type Safety** - Full TypeScript support
 - **Hot Module Replacement** - Fast development with Vite
 - **Code Quality** - Biome for linting and formatting
-- **E2E Testing** - Comprehensive Playwright test suite
 - **Demo Users** - Pre-configured demo accounts for testing
 
 ## 🚀 Quick Start
@@ -104,14 +103,6 @@ The system automatically creates these demo accounts:
 
 ```
 qwik-dashboard-template/
-├── e2e/                      # Playwright E2E tests
-│   ├── basic.spec.ts
-│   ├── database-init.spec.ts
-│   ├── dashboard.spec.ts
-│   ├── permissions.spec.ts
-│   ├── roles.spec.ts
-│   ├── theme.spec.ts
-│   └── users.spec.ts
 ├── prisma/
 │   ├── schema.prisma         # Database schema
 │   └── seed.ts               # Database seed data
@@ -141,7 +132,7 @@ qwik-dashboard-template/
 │   │   │   └── verify-2fa/
 │   │   ├── dashboard/        # Dashboard routes
 │   │   │   ├── index.tsx     # Dashboard home
-│   │   │   ├── profile/       # User profile
+│   │   │   ├── profile/      # User profile
 │   │   │   ├── roles/        # Role management
 │   │   │   ├── security/     # Security settings
 │   │   │   ├── settings/     # System settings
@@ -163,9 +154,9 @@ qwik-dashboard-template/
 │   └── root.tsx
 ├── .env.example              # Environment variables template
 ├── biome.json                # Biome configuration
-├── playwright.config.ts       # Playwright configuration
-├── tsconfig.json              # TypeScript configuration
-└── vite.config.ts             # Vite configuration
+├── playwright.config.ts      # Playwright configuration
+├── tsconfig.json             # TypeScript configuration
+└── vite.config.ts            # Vite configuration
 ```
 
 ## 🧪 Development
@@ -190,26 +181,9 @@ bun run lint             # Lint and type check
 # Database
 bun run db:studio        # Open Prisma Studio (browse database)
 
-# Testing
-bun run test             # Run all tests
-bun run test:ui          # Open Playwright UI
-bun run test:headed      # Run tests in headed mode
-bun run test:debug       # Debug tests
-
 # Preview
 bun run preview          # Preview production build
 ```
-
-### Testing
-
-E2E test coverage includes:
-- ✅ Authentication flows
-- ✅ Database initialization
-- ✅ User management
-- ✅ Role management
-- ✅ Permission system
-- ✅ Dark mode toggle
-- ✅ Form validation
 
 ## 🗄️ Database
 
@@ -357,7 +331,6 @@ bun qwik add express
 | Validation        | Zod                           |
 | Icons             | @qwikest/icons                |
 | Charts            | Chart.js                      |
-| Testing           | Playwright                    |
 | Linting/Formatting| Biome                         |
 | Type Checking     | TypeScript 5.4                |
 | Build Tool        | Vite 5.3                      |
@@ -369,16 +342,14 @@ Contributions are welcome! Please follow these steps:
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Run tests (`bun run test`)
-5. Run linting (`bun run lint`)
-6. Push to the branch (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
+4. Run linting (`bun run lint`)
+5. Push to the branch (`git push origin feature/amazing-feature`)
+6. Open a Pull Request
 
 ### Code Style
 
 - Use **TypeScript** for all new files
 - Follow **Biome** formatting rules
-- Write **tests** for new features
 - Add **JSDoc comments** for public APIs
 - Use **semantic commit messages**
 
@@ -391,7 +362,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Qwik](https://qwik.dev/) - Resumable framework
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
 - [Prisma](https://www.prisma.io/) - Next-generation ORM
-- [Playwright](https://playwright.dev/) - E2E testing
 - [Biome](https://biomejs.dev/) - Toolchain for web projects
 
 ## 📧 Support

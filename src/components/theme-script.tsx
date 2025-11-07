@@ -28,6 +28,5 @@ export const ThemeScript = () => {
     })();
   `;
 
-  // biome-ignore lint/security/noDangerouslySetInnerHtml: This is safe because we control the script content
   return <script dangerouslySetInnerHTML={script} />;
 };
