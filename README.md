@@ -1,3 +1,5 @@
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/81ea4c3a-77ab-4448-83d7-af31d5a99cca" />
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a6b2f635-1d62-43db-81d3-b7ebcd193b28" />
 
 # Qwik Dashboard Template
