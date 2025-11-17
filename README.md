@@ -330,7 +330,6 @@ bun qwik add express
 | 2FA               | speakeasy + qrcode            |
 | Validation        | Zod                           |
 | Icons             | @qwikest/icons                |
-| Charts            | Chart.js                      |
 | Linting/Formatting| Biome                         |
 | Type Checking     | TypeScript 5.4                |
 | Build Tool        | Vite 5.3                      |
