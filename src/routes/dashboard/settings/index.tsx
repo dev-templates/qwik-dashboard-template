@@ -112,7 +112,7 @@ export default component$(() => {
           <Form action={updateSettings} class="space-y-6">
             <div class="flex items-center justify-between rounded-lg border p-4">
               <div class="space-y-0.5">
-                <label for="forceTwoFactor" class="text-base font-medium text-gray-900 dark:text-white">
+                <label for="forceTwoFactor" class="text-base font-medium text-gray-900 dark:text-white cursor-pointer">
                   Force Two-Factor Authentication
                 </label>
                 <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -125,7 +125,7 @@ export default component$(() => {
                 name="forceTwoFactor"
                 value="true"
                 checked={loadSettings.value?.forceTwoFactor || false}
-                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                class="cursor-pointer h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
             </div>
 

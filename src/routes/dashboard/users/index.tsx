@@ -564,7 +564,7 @@ export default component$(() => {
                         <button
                           type="button"
                           onClick$={() => handleEditUser(user)}
-                          class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                          class="cursor-pointer text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
                         >
                           Edit
                         </button>
@@ -573,14 +573,14 @@ export default component$(() => {
                           onClick$={async () => {
                             await toggleStatus.submit({ userId: user.id });
                           }}
-                          class="text-yellow-600 hover:text-yellow-900 dark:text-yellow-400 dark:hover:text-yellow-300"
+                          class="cursor-pointer text-yellow-600 hover:text-yellow-900 dark:text-yellow-400 dark:hover:text-yellow-300"
                         >
                           {user.status === "active" ? "Disable" : "Enable"}
                         </button>
                         <button
                           type="button"
                           onClick$={() => handleDeleteUser(user)}
-                          class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
+                          class="cursor-pointer text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
                         >
                           Delete
                         </button>
@@ -589,7 +589,7 @@ export default component$(() => {
                       <button
                         type="button"
                         onClick$={() => handleEditUser(user)}
-                        class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                        class="cursor-pointer text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
                       >
                         View
                       </button>

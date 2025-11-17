@@ -476,7 +476,7 @@ export default component$(() => {
                           type="button"
                           onClick$={() => handleEditRole(role)}
                           disabled={loadingRoleId.value === role.id}
-                          class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                          class="cursor-pointer text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           {loadingRoleId.value === role.id ? "Loading..." : "Edit"}
                         </button>
@@ -484,7 +484,7 @@ export default component$(() => {
                           <button
                             type="button"
                             onClick$={() => handleDeleteRole(role)}
-                            class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
+                            class="cursor-pointer text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
                           >
                             Delete
                           </button>
@@ -495,7 +495,7 @@ export default component$(() => {
                         type="button"
                         onClick$={() => handleEditRole(role)}
                         disabled={loadingRoleId.value === role.id}
-                        class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                        class="cursor-pointer text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         View
                       </button>
@@ -603,12 +603,12 @@ export default component$(() => {
                     </h5>
                     <div class="grid grid-cols-2 gap-2">
                       {permissions.map((permission) => (
-                        <label key={permission.id} class="flex items-center">
+                        <label key={permission.id} class="flex items-center cursor-pointer">
                           <input
                             type="checkbox"
                             checked={newRolePermissions.value.includes(permission.id)}
                             onChange$={() => togglePermission(permission.id, true)}
-                            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"
+                            class="cursor-pointer h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"
                           />
                           <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">{permission.displayName}</span>
                         </label>
@@ -726,13 +726,13 @@ export default component$(() => {
                       </h5>
                       <div class="grid grid-cols-2 gap-2">
                         {permissions.map((permission) => (
-                          <label key={permission.id} class="flex items-center">
+                          <label key={permission.id} class="flex items-center cursor-pointer">
                             <input
                               type="checkbox"
                               checked={editRolePermissions.value.includes(permission.id)}
                               onChange$={() => rolesData.value.canManage && togglePermission(permission.id, false)}
                               disabled={!rolesData.value.canManage}
-                              class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 disabled:opacity-50"
+                              class="cursor-pointer h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
                             />
                             <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">{permission.displayName}</span>
                           </label>

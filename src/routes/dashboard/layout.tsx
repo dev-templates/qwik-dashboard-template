@@ -3,7 +3,6 @@ import type { RequestHandler } from "@builder.io/qwik-city";
 import { routeLoader$, useLocation } from "@builder.io/qwik-city";
 import {
   LuCheck,
-  LuFileText,
   LuHome,
   LuLock,
   LuMenu,
@@ -153,11 +152,6 @@ export default component$(() => {
         name: "Security",
         href: "/dashboard/security",
         icon: LuLock,
-      },
-      {
-        name: "Reports",
-        href: "/dashboard/reports",
-        icon: LuFileText,
       },
     ],
   });
