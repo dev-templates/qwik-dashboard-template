@@ -364,12 +364,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Prisma](https://www.prisma.io/) - Next-generation ORM
 - [Biome](https://biomejs.dev/) - Toolchain for web projects
 
-## 📧 Support
-
-For questions or issues:
-- Open an issue on GitHub
-- Join the [Qwik Discord](https://qwik.dev/chat)
-
----
-
-**Built with ⚡ Qwik - Instant-loading web apps**

@@ -29,7 +29,7 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/settings.json
 !.vscode/*.code-snippets
-.cursor/*
+/.cursor
 .cursorrules
 
 .idea
@@ -53,3 +53,8 @@ prisma/migrations/
 
 # tmp
 tmp/
+
+# Claude
+/.claude
+CLAUDE.md
+AGENTS.md
