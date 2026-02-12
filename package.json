@@ -23,7 +23,7 @@
     "db:studio": "prisma studio"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.14",
+    "@biomejs/biome": "2.3.15",
     "@builder.io/qwik": "^1.17.2",
     "@builder.io/qwik-city": "^1.17.2",
     "@qwikest/icons": "^0.0.13",
