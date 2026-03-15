@@ -20,16 +20,40 @@ async function isDatabaseInitialized(): Promise<boolean> {
 }
 
 /**
+ * Resolve SQLite database file path from DATABASE_URL.
+ *
+ * DATABASE_URL has two conventions:
+ *   - Prisma CLI style: "file:./dev.db"        (resolved from prisma/ directory)
+ *   - libsql style:     "file:./prisma/dev.db"  (resolved from project root, used in db.ts)
+ *
+ * Both point to the same file: <project_root>/prisma/dev.db
+ * This function normalises them to an absolute path.
+ */
+function resolveSqlitePath(databaseUrl: string): string | null {
+  if (!databaseUrl.startsWith("file:")) {
+    return null;
+  }
+
+  let relativePath = databaseUrl.replace("file:", "").replace(/^\.\//, "");
+
+  // Prisma CLI format omits the prisma/ prefix because it resolves from prisma/ dir.
+  // If the path doesn't already include "prisma/", add it to resolve from project root.
+  if (!relativePath.startsWith("prisma/")) {
+    relativePath = join("prisma", relativePath);
+  }
+
+  return join(process.cwd(), relativePath);
+}
+
+/**
  * Check if database file exists (SQLite only)
  */
 function checkDatabaseFile(): boolean {
-  const databaseUrl = process.env.DATABASE_URL || "";
+  const databaseUrl = process.env.DATABASE_URL || "file:./prisma/dev.db";
+  const filePath = resolveSqlitePath(databaseUrl);
 
-  // Check if it's a SQLite database
-  if (databaseUrl.startsWith("file:")) {
-    const dbPath = databaseUrl.replace("file:", "");
-    const fullPath = join(process.cwd(), "prisma", dbPath);
-    return existsSync(fullPath);
+  if (filePath) {
+    return existsSync(filePath);
   }
 
   // For other database types, assume database exists

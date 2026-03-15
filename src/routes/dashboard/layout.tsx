@@ -69,10 +69,6 @@ export default component$(() => {
   const userData = useUserData();
   const location = useLocation();
 
-  const isActive = (path: string) => {
-    return location.url.pathname === path;
-  };
-
   // Apply theme changes reactively
   useTask$(({ track }) => {
     track(() => currentTheme.value);
@@ -181,14 +177,14 @@ export default component$(() => {
                           key={item.name}
                           href={item.href}
                           class={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                            isActive(item.href)
+                            location.url.pathname === item.href
                               ? "bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300"
                               : "bg-gray-50 text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                           }`}
                         >
                           <item.icon
                             class={`mr-3 h-5 w-5 ${
-                              isActive(item.href)
+                              location.url.pathname === item.href
                                 ? "text-indigo-500 dark:text-indigo-400"
                                 : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
                             }`}
@@ -356,14 +352,14 @@ export default component$(() => {
                           key={item.name}
                           href={item.href}
                           class={`group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                            isActive(item.href)
+                            location.url.pathname === item.href
                               ? "bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300"
                               : "bg-gray-50 text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                           }`}
                         >
                           <item.icon
                             class={`mr-3 h-5 w-5 ${
-                              isActive(item.href)
+                              location.url.pathname === item.href
                                 ? "text-indigo-500 dark:text-indigo-400"
                                 : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
                             }`}

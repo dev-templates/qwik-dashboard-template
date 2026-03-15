@@ -318,12 +318,6 @@ export default component$(() => {
   // Create role filter options with "All Roles" option
   const roleFilterOptions = [{ value: "all", label: "All Roles" }, ...roleOptions];
 
-  // Helper function to get role display name
-  const getRoleDisplayName = (roleName: string) => {
-    const role = usersData.value.roles.find((r) => r.name === roleName);
-    return role?.displayName || roleName;
-  };
-
   const handleSearch = $(() => {
     const params = new URLSearchParams();
     if (searchInput.value) params.set("search", searchInput.value);
@@ -538,7 +532,9 @@ export default component$(() => {
                   </div>
                 </TableCell>
                 <TableCell align="center">
-                  <Badge variant={user.role === "admin" ? "info" : "success"}>{getRoleDisplayName(user.role)}</Badge>
+                  <Badge variant={user.role === "admin" ? "info" : "success"}>
+                    {usersData.value.roles.find((r) => r.name === user.role)?.displayName || user.role}
+                  </Badge>
                 </TableCell>
                 <TableCell align="center">
                   <Badge

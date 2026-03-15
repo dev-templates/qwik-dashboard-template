@@ -1,9 +1,9 @@
 import { createId } from "@paralleldrive/cuid2";
-import type { LoginAttempt, Permission, Session, User } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import QRCode from "qrcode";
 import speakeasy from "speakeasy";
+import type { LoginAttempt, Permission, Session, User } from "~/generated/prisma/client";
 import type { AuthUser, JWTPayload, LoginCredentials, RegisterData, TwoFactorSetupData } from "~/types/auth";
 import { authConfig } from "../auth/config";
 import { prisma } from "../db";

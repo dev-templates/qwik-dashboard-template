@@ -1,4 +1,4 @@
-import { component$, Slot, useSignal, useTask$ } from "@builder.io/qwik";
+import { $, component$, Slot, useOnDocument, useSignal } from "@builder.io/qwik";
 import { LuX } from "@qwikest/icons/lucide";
 import { cn } from "~/utils/cn";
 
@@ -13,20 +13,14 @@ export const Modal = component$<ModalProps>(({ show, onClose$, title, size = "md
   const modalRef = useSignal<HTMLDivElement>();
 
   // Handle escape key
-  useTask$(({ track }) => {
-    track(() => show);
-
-    if (!show) return;
-
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && onClose$) {
+  useOnDocument(
+    "keydown",
+    $((e: KeyboardEvent) => {
+      if (show && e.key === "Escape" && onClose$) {
         onClose$();
       }
-    };
-
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  });
+    }),
+  );
 
   const sizeClasses = {
     sm: "max-w-md",
