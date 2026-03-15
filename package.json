@@ -23,33 +23,35 @@
     "db:studio": "prisma studio"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.14",
-    "@builder.io/qwik": "^1.17.2",
-    "@builder.io/qwik-city": "^1.17.2",
+    "@biomejs/biome": "2.4.7",
+    "@builder.io/qwik": "^1.19.2",
+    "@builder.io/qwik-city": "^1.19.2",
     "@qwikest/icons": "^0.0.13",
-    "@tailwindcss/postcss": "^4.1.17",
-    "@tailwindcss/vite": "^4.1.17",
+    "@tailwindcss/postcss": "^4.2.1",
+    "@tailwindcss/vite": "^4.2.1",
     "@types/bcryptjs": "^3.0.0",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "24.10.2",
     "@types/qrcode": "^1.5.6",
     "@types/speakeasy": "^2.0.10",
-    "prisma": "^6.19.0",
-    "tailwindcss": "^4.1.17",
-    "tsx": "^4.20.6",
+    "prisma": "^7.4.0",
+    "tailwindcss": "^4.2.1",
+    "tsx": "^4.21.0",
     "typescript": "5.9.3",
     "vite": "7.3.1",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^6.1.1"
   },
   "dependencies": {
-    "@paralleldrive/cuid2": "^3.0.4",
-    "@prisma/client": "^6.19.0",
+    "@paralleldrive/cuid2": "^3.3.0",
+    "@prisma/client": "^7.4.0",
+    "@prisma/adapter-libsql": "^7.4.0",
+    "@libsql/client": "^0.15.0",
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
-    "jsonwebtoken": "^9.0.2",
+    "jsonwebtoken": "^9.0.3",
     "qrcode": "^1.5.4",
     "speakeasy": "^2.0.0",
-    "tailwind-merge": "^3.4.0",
-    "zod": "^4.1.12"
+    "tailwind-merge": "^3.5.0",
+    "zod": "^4.3.6"
   }
 }

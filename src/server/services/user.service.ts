@@ -1,5 +1,5 @@
-import type { Prisma } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import type { Prisma } from "~/generated/prisma/client";
 import type { AuthUser } from "~/types/auth";
 import type { CreateUserInput, UpdateUserInput, User, UserFilters, UsersResponse } from "~/types/user";
 import { prisma } from "../db";

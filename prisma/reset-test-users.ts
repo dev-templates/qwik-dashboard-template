@@ -1,6 +1,10 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaLibSql } from "@prisma/adapter-libsql";
+import { PrismaClient } from "../src/generated/prisma/client";
 
-const prisma = new PrismaClient();
+const adapter = new PrismaLibSql({
+  url: process.env.DATABASE_URL || "file:./prisma/dev.db",
+});
+const prisma = new PrismaClient({ adapter });
 
 async function resetTestUsers() {
   console.log("🔧 Resetting test user states...");

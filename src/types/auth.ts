@@ -1,4 +1,4 @@
-import type { Permission, User } from "@prisma/client";
+import type { Permission, User } from "~/generated/prisma/client";
 
 export interface JWTPayload {
   userId: number;
